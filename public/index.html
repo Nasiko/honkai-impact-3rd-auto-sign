@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="home">
+      <div class="cboxs" title="自動簽到開關">
+        <label class="cbox">
+          開啟自動簽到
+          <input type="checkbox" checked="checked" id="enable">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="sign-time-setting">
+        每日簽到時間(24時制) <br />
+        <input type="number" name="" id="hours" min="0" max="23" title="小時(0~23)"> 時
+        <input type="number" name="" id="minutes" min="0" max="59" title="分鐘(0~59)"> 分
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>

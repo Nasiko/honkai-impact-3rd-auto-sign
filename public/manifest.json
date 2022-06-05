@@ -1,0 +1,32 @@
+{
+    "name": "崩壞3RD官方論壇自動簽到",
+    "version": "1.1",
+    "manifest_version": 3,
+    "description": "HoYoLab 遊戲每日獎勵自動簽到，可自訂調整簽到時間。\n※請記得先登入 HoYoLab 遊戲帳號。",
+    "permissions": [
+      "background",
+      "storage",
+      "alarms"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "128": "icon.png"
+    },
+    "action": {
+      "default_icon": "icon.png",
+      "default_popup": "index.html"
+    },
+    "content_scripts": [
+      {
+        "matches": [
+          "https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111"
+        ],
+        "js": [
+          "content.js"
+        ],
+        "run-at": "document_end"
+      }
+    ]
+  }

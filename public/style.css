@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-size: 16px;
+    font-family: "微軟正黑體" !important;
+    color: rgb(58, 89, 135);
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(58, 59, 135, 0.26);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(58, 82, 135, 0.56);
+  }
+  
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  html,
+  body {
+    background: rgb(240, 232, 221);
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  .container {
+    border: 5px solid rgb(58, 63, 135);
+    border-bottom: 6px solid rgb(58, 59, 135);
+    width: 200px;
+    height: max-content;
+    padding: 10px;
+    overflow: hidden;
+    transition: 0.15s;
+  }
+  
+  .big {
+    width: 500px;
+  }
+  
+  .custom-url-list {
+    width: 268px;
+  }
+  
+  .custom-url-list ul {
+    overflow: overlay;
+    max-height: 194px;
+  }
+  
+  .custom-url-list ul li {
+    display: flex;
+    margin: 0.2rem 0;
+    padding: 0 8px;
+    padding-left: 0;
+  }
+  
+  .custom-url-list ul li:first-of-type {
+    margin-top: 0;
+  }
+  
+  .custom-url-list ul li:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  .custom-url-list div.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox label {
+    margin-left: 0.3rem;
+  }
+  
+  .cbox {
+    display: block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .cbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 21px;
+    width: 21px;
+    background-color: rgb(221, 224, 240);
+    border: 1px solid rgb(58, 59, 135);
+    transition: 0.2s;
+  }
+  
+  .cbox:hover input ~ .checkmark {
+    background-color: rgb(200, 201, 230);
+  }
+  
+  .cbox input:checked ~ .checkmark {
+    background-color: rgb(96, 129, 220);
+  }
+  
+  .cbox input:checked:hover ~ .checkmark {
+    background-color: rgba(118, 129, 223, 0.856);
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .cbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .cbox .checkmark:after {
+    left: 6px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .sign-time-setting {
+    margin-top: 1.3rem;
+  }
+  
+  input[type="number"],
+  input[type="text"] {
+    border: 1px solid rgb(58, 63, 135);
+    outline: none;
+    background-color: rgb(221, 221, 240);
+    width: 3rem;
+    padding: 0.2rem;
+  }
+  
+  input[type="text"] {
+    display: inline-block;
+    width: 100%;
+  }
+  
+  button {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid rgb(58, 59, 135);
+    transition: 0.2s;
+    padding: 0.1rem;
+  }
+  button.link {
+    border: none;
+    text-decoration: underline;
+  }
+  
+  button:hover {
+    background-color: rgb(171, 178, 209);
+    cursor: pointer;
+  }
+  
+  button:active {
+    background-color: rgba(171, 175, 209, 0.6);
+  }
+  
+  .description {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .description .sub-description {
+    font-size: 14px;
+    font-style: italic;
+  }
+  
+  .add-url-list {
+    text-decoration: none;
+    padding: 5px 12px;
+    margin-top: 10px;
+  }
+  
+  .remove-url-list {
+    padding: 0 10px;
+    border-left: none;
+  }
