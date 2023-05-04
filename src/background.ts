@@ -88,6 +88,12 @@ chrome.alarms.onAlarm.addListener(() => {
           "https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111",
         active: false, //開啟分頁時不會focus
       });
+
+      chrome.tabs.create({
+        url:
+          "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311",
+        active: false, //開啟分頁時不會focus
+      });
     }
   });
 });
