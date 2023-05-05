@@ -1,5 +1,6 @@
 function loadPage() {
-  let enable = document.querySelector("#enable") as HTMLInputElement; //開啟自動簽到
+  let enableH = document.querySelector("#enableH") as HTMLInputElement; //開啟自動簽到
+  let enableS = document.querySelector("#enableS") as HTMLInputElement; //開啟自動簽到
   let hours = document.querySelector("#hours") as HTMLInputElement; //小時
   let minutes = document.querySelector("#minutes") as HTMLInputElement; //分鐘
   let container = document.querySelector(".container") as HTMLDivElement;
@@ -17,7 +18,7 @@ function loadPage() {
     }
   }
 
-  chrome.storage.sync.get(["signTime", "enable"], (data) => {
+  chrome.storage.sync.get(["signTime", "enableH", "enableS"], (data) => {
     
     if (data.signTime === undefined) {
       data.signTime = { hours: 0, minutes: 5 };
@@ -26,14 +27,22 @@ function loadPage() {
       });
     }
 
-    if (data.enable === undefined) {
-      data.enable = true;
+    if (data.enableH === undefined) {
+      data.enableH = true;
       chrome.storage.sync.set({
-        enable: data.enable, //是否啟動
+        enableH: data.enableH, //是否啟動
       });
     }
 
-    enable.checked = Boolean(data.enable);
+    if (data.enableS === undefined) {
+      data.enableS = true;
+      chrome.storage.sync.set({
+        enableS: data.enableS, //是否啟動
+      });
+    }
+
+    enableH.checked = Boolean(data.enableH);
+    enableS.checked = Boolean(data.enableS);
     hours.value = data.signTime.hours;
     minutes.value = data.signTime.minutes;
   });
@@ -49,15 +58,24 @@ function loadPage() {
     });
   }
 
-  function changeSetting() {
+  function changeSettingH() {
     chrome.storage.sync.set({
-      enable: enable.checked,
+      enableH: enableH.checked,
+      isopen: false,
+    });
+  }
+
+  function changeSettingS() {
+    chrome.storage.sync.set({
+      enableS: enableS.checked,
+      isopen: false,
     });
   }
 
   hours.addEventListener("change", change);
   minutes.addEventListener("change", change);
-  enable.addEventListener("change", changeSetting);
+  enableH.addEventListener("change", changeSettingH);
+  enableS.addEventListener("change", changeSettingS);
 }
 
 window.onload = loadPage;

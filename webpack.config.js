@@ -6,7 +6,8 @@ const config = (_, options) => {
   let config = {
     entry: {
       background: "./src/background.ts",
-      content: "./src/content.ts",
+      content3RD: "./src/content3RD.ts",
+      contentStar: "./src/contentStar.ts",
       popup: "./src/popup.ts",
     },
     output: {

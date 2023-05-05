@@ -4,6 +4,7 @@ export interface IDataType {
     hours: number;
     minutes: number;
   };
-  enable: boolean;
+  enableH: boolean;
+  enableS: boolean;
   isopen: boolean;
 }

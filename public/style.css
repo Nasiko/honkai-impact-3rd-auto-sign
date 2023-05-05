@@ -36,7 +36,7 @@
   .container {
     border: 5px solid rgb(58, 63, 135);
     border-bottom: 6px solid rgb(58, 59, 135);
-    width: 200px;
+    width: 300px;
     height: max-content;
     padding: 10px;
     overflow: hidden;

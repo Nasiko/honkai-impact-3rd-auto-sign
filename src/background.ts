@@ -6,15 +6,16 @@ let config: IDataType = {
     hours: 0,
     minutes: 5,
   },
-  enable: true, // 是否啟動
+  enableH: true, // 是否啟動「崩壞3RD」自動簽到
+  enableS: true, // 是否啟動「星穹鐵道」自動簽到
   isopen: false, // 是否簽到
 };
 
 chrome.alarms.clear('HoYoLabSign');
 
 chrome.alarms.onAlarm.addListener(() => {
-  chrome.storage.sync.get(["lastDate", "signTime", "enable", "isopen"], (data) => {
-    let { lastDate, enable, signTime, isopen } = data as IDataType;
+  chrome.storage.sync.get(["lastDate", "signTime", "enableH", "enableS", "isopen"], (data) => {
+    let { lastDate, enableH, enableS, signTime, isopen } = data as IDataType;
 
     if (lastDate === undefined) {
       lastDate = new Date().getDate();
@@ -30,10 +31,17 @@ chrome.alarms.onAlarm.addListener(() => {
       });
     }
 
-    if (enable === undefined) {
-      enable = true;
+    if (enableH === undefined) {
+      enableH = true;
       chrome.storage.sync.set({
-        enable: enable, //是否啟動
+        enable: enableH, //是否啟動
+      });
+    }
+
+    if (enableS === undefined) {
+      enableS = true;
+      chrome.storage.sync.set({
+        enable: enableS, //是否啟動
       });
     }
 
@@ -45,7 +53,7 @@ chrome.alarms.onAlarm.addListener(() => {
     }
 
     // 未啟動就不執行
-    if (!enable) return;
+    if (!(enableH || enableS)) return;
 
     let h = Number(signTime.hours);
     let m = Number(signTime.minutes);
@@ -59,8 +67,8 @@ chrome.alarms.onAlarm.addListener(() => {
     /* debug */
     console.clear();
     console.log("CurrentDate:", now);
-    console.log("IsOpen:", isopen);
-    console.log("Now:", now.getDate(), ",Last:", lastDate);
+    // console.log("IsOpen:", isopen);
+    // console.log("Now:", now.getDate(), ",Last:", lastDate);
 
     if (isopen && now.getDate() !== lastDate) {
       isopen = false;
@@ -83,17 +91,20 @@ chrome.alarms.onAlarm.addListener(() => {
 
       //開啟米哈遊的簽到頁面
       //這邊不需要做任何簽到動作，因為content.ts裡面已經設定只要開啟米哈遊網頁就會自動簽到了
-      chrome.tabs.create({
-        url:
-          "https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111",
-        active: false, //開啟分頁時不會focus
-      });
 
-      chrome.tabs.create({
-        url:
-          "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311",
-        active: false, //開啟分頁時不會focus
-      });
+      if (enableH) {
+        chrome.tabs.create({
+          url: "https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111",
+          active: false, //開啟分頁時不會focus
+        });
+      }
+
+      if (enableS) {
+        chrome.tabs.create({
+          url: "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311",
+          active: false, //開啟分頁時不會focus
+        });
+      }
     }
   });
 });
