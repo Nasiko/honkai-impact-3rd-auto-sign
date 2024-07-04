@@ -1,6 +1,7 @@
 function loadPage() {
   let enableH = document.querySelector("#enableH") as HTMLInputElement; //開啟自動簽到
   let enableS = document.querySelector("#enableS") as HTMLInputElement; //開啟自動簽到
+  let enableZ = document.querySelector("#enableZ") as HTMLInputElement; //開啟自動簽到
   let hours = document.querySelector("#hours") as HTMLInputElement; //小時
   let minutes = document.querySelector("#minutes") as HTMLInputElement; //分鐘
   let container = document.querySelector(".container") as HTMLDivElement;
@@ -18,7 +19,7 @@ function loadPage() {
     }
   }
 
-  chrome.storage.sync.get(["signTime", "enableH", "enableS"], (data) => {
+  chrome.storage.sync.get(["signTime", "enableH", "enableS", "enableZ"], (data) => {
     
     if (data.signTime === undefined) {
       data.signTime = { hours: 0, minutes: 5 };
@@ -41,8 +42,16 @@ function loadPage() {
       });
     }
 
+    if (data.enableZ === undefined) {
+      data.enableZ = true;
+      chrome.storage.sync.set({
+        enableZ: data.enableZ, //是否啟動
+      });
+    }
+
     enableH.checked = Boolean(data.enableH);
     enableS.checked = Boolean(data.enableS);
+    enableZ.checked = Boolean(data.enableZ);
     hours.value = data.signTime.hours;
     minutes.value = data.signTime.minutes;
   });
@@ -72,10 +81,18 @@ function loadPage() {
     });
   }
 
+  function changeSettingZ() {
+    chrome.storage.sync.set({
+      enableZ: enableZ.checked,
+      isopen: false,
+    });
+  }
+
   hours.addEventListener("change", change);
   minutes.addEventListener("change", change);
   enableH.addEventListener("change", changeSettingH);
   enableS.addEventListener("change", changeSettingS);
+  enableZ.addEventListener("change", changeSettingZ);
 }
 
 window.onload = loadPage;

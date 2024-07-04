@@ -1,6 +1,6 @@
 {
-    "name": "崩壞3RD、星穹鐵道HoYoLab自動簽到",
-    "version": "1.3",
+    "name": "崩壞3RD、星穹鐵道、絕區零HoYoLab自動簽到",
+    "version": "1.4",
     "manifest_version": 3,
     "description": "HoYoLab 遊戲每日獎勵自動簽到，可自訂調整簽到時間。\n※請記得先登入 HoYoLab 遊戲帳號。",
     "permissions": [
@@ -34,6 +34,15 @@
         ],
         "js": [
           "contentStar.js"
+        ],
+        "run-at": "document_end"
+      },
+      {
+        "matches": [
+          "https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091"
+        ],
+        "js": [
+          "contentZZZ.js"
         ],
         "run-at": "document_end"
       }

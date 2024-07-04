@@ -8,14 +8,15 @@ let config: IDataType = {
   },
   enableH: true, // 是否啟動「崩壞3RD」自動簽到
   enableS: true, // 是否啟動「星穹鐵道」自動簽到
+  enableZ: true, // 是否啟動「絕區零」自動簽到
   isopen: false, // 是否簽到
 };
 
 chrome.alarms.clear('HoYoLabSign');
 
 chrome.alarms.onAlarm.addListener(() => {
-  chrome.storage.sync.get(["lastDate", "signTime", "enableH", "enableS", "isopen"], (data) => {
-    let { lastDate, enableH, enableS, signTime, isopen } = data as IDataType;
+  chrome.storage.sync.get(["lastDate", "signTime", "enableH", "enableS", "enableZ", "isopen"], (data) => {
+    let { lastDate, signTime, enableH, enableS, enableZ, isopen } = data as IDataType;
 
     if (lastDate === undefined) {
       lastDate = new Date().getDate();
@@ -45,6 +46,13 @@ chrome.alarms.onAlarm.addListener(() => {
       });
     }
 
+    if (enableZ === undefined) {
+      enableZ = true;
+      chrome.storage.sync.set({
+        enable: enableZ, //是否啟動
+      });
+    }
+
     if (isopen === undefined) {
       isopen = false;
       chrome.storage.sync.set({
@@ -53,7 +61,7 @@ chrome.alarms.onAlarm.addListener(() => {
     }
 
     // 未啟動就不執行
-    if (!(enableH || enableS)) return;
+    if (!(enableH || enableS || enableZ)) return;
 
     let h = Number(signTime.hours);
     let m = Number(signTime.minutes);
@@ -102,6 +110,13 @@ chrome.alarms.onAlarm.addListener(() => {
       if (enableS) {
         chrome.tabs.create({
           url: "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311",
+          active: false, //開啟分頁時不會focus
+        });
+      }
+
+      if (enableZ) {
+        chrome.tabs.create({
+          url: "https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091",
           active: false, //開啟分頁時不會focus
         });
       }

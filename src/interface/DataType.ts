@@ -6,5 +6,6 @@ export interface IDataType {
   };
   enableH: boolean;
   enableS: boolean;
+  enableZ: boolean;
   isopen: boolean;
 }
